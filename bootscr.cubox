@@ -1,0 +1,24 @@
+echo '======== Starting boot ========'
+usb start
+setenv uimagearg 'uImage'
+setenv uinitarg 'uInitrd'
+setenv my1arg 'console=ttyS0,115200n8 vmalloc=48M'
+
+ext4load ide 0:1 0x02000000 /boot/${uimagearg} && ext4load ide 0:1 0x20000000 /boot/${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda1 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+ext4load usb 0:1 0x02000000 /boot/${uimagearg} && ext4load usb 0:1 0x20000000 /boot/${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda1 rootfstype=ext4 rootwait usb0Mode=host usb1Mode=host' && bootm 0x02000000 0x20000000
+ext4load mmc 0:1 0x02000000 /boot/${uimagearg} && ext4load mmc 0:1 0x20000000 /boot/${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/mmcblk0p1 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+
+ext4load ide 0:1 0x02000000 /boot/${uimagearg} && ext4load ide 0:1 0x20000000 /boot/${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda1 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+ext4load usb 0:1 0x02000000 /boot/${uimagearg} && ext4load usb 0:1 0x20000000 /boot/${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda1 rootfstype=ext4 rootwait usb0Mode=host usb1Mode=host' && bootm 0x02000000 0x20000000
+ext4load mmc 0:1 0x02000000 /boot/${uimagearg} && ext4load mmc 0:1 0x20000000 /boot/${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/mmcblk0p1 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+
+ext4load ide 0:1 0x02000000 /${uimagearg} && ext4load ide 0:1 0x20000000 /${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda2 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+ext4load usb 0:1 0x02000000 /${uimagearg} && ext4load usb 0:1 0x20000000 /${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda2 rootfstype=ext4 rootwait usb0Mode=host usb1Mode=host' && bootm 0x02000000 0x20000000
+ext4load mmc 0:1 0x02000000 /${uimagearg} && ext4load mmc 0:1 0x20000000 /${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/mmcblk0p2 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+
+ext4load ide 0:1 0x02000000 /${uimagearg} && ext4load ide 0:1 0x20000000 /${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda2 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+ext4load usb 0:1 0x02000000 /${uimagearg} && ext4load usb 0:1 0x20000000 /${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/sda2 rootfstype=ext4 rootwait usb0Mode=host usb1Mode=host' && bootm 0x02000000 0x20000000
+ext4load mmc 0:1 0x02000000 /${uimagearg} && ext4load mmc 0:1 0x20000000 /${uinitarg} && setenv bootargs ${my1arg} 'root=/dev/mmcblk0p2 rootfstype=ext4 rootwait' && bootm 0x02000000 0x20000000
+
+# Recompile with:
+# mkimage -C none -A arm -T script -d /boot/bootscr.cubox /boot/boot.scr
